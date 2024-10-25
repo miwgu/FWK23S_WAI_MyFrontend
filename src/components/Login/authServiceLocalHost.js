@@ -1,4 +1,3 @@
-// src/authService.js
 export const login = async (config, email, password) => {
     const { apiUrl } = config;
     const response = await fetch(`${apiUrl}/login`, {
@@ -58,27 +57,10 @@ export const secureCall = async (config, url, options = {}) => {
     return await response.json();
 };
 
-// src/authService.js
-
 export const logout = async (config) => {
-    const { apiUrl } = config;
-    try {
-        // Optional: Inform the server to invalidate the session/token
-        const response = await fetch(`${apiUrl}/logout`, {
-            method: 'POST',
-            credentials: 'include'
-        });
-        // Check if you need to handle any response for logout
-        if (!response.ok) {
-            throw new Error(`Logout failed: ${response.statusText}`);
-        }
-    } catch (err) {
-        console.error('Logout error:', err.message);
-        throw err;  // Optionally re-throw if you need to handle this higher up
-    } finally {
-        // Clear any session-related data regardless of the server's response
+    
         sessionStorage.removeItem('csrfToken');
-    }
+    
     return { isLoggedIn: false };
 };
 

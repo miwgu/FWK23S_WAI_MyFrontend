@@ -27,9 +27,11 @@ const Login = ({}) => {
 
   return (
    <>
+   <div className={styles.mainContainer}>
     <div className={styles.loginText}>
         <h1>Login</h1>
     </div>
+    
     <div className={styles.loginContainer}>
     
     <EmailAtom  onEmailChange={setEmail}/>
@@ -40,6 +42,7 @@ const Login = ({}) => {
         <li><CompanyRegLinkAtom navigation={navToPage}/></li>
     </ul> */}
     
+    </div>
     </div>
     </>
 
