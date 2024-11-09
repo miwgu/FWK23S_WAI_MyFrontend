@@ -105,15 +105,19 @@ const SideNav = () => {
                 </li>)};
                 
                 
-
-
+               {!isLoggedIn ? (
                 <li className='nav-text'>
-                  <Link to='/register' >
-                      <BiSolidPencil />
-                      <span className='uLine-text'>Register</span>
-                  </Link>
+                <Link to='/register' >
+                    <BiSolidPencil />
+                    <span className='uLine-text'>Register</span>
+                </Link>
 
-                </li>
+              </li>
+               ):(
+                null
+               )
+               }
+
 
                {/*  {!isAuth ? 
                 null:

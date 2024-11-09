@@ -1,9 +1,9 @@
-export const login = async (config, email, password) => {
+export const login = async (config, email, password, token) => {
     const { apiUrl } = config;
     const response = await fetch(`${apiUrl}/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email, password, token }),
         credentials: 'include'
     });
     if (!response.ok) {
@@ -60,7 +60,8 @@ export const secureCall = async (config, url, options = {}) => {
 export const logout = async (config) => {
     
         sessionStorage.removeItem('csrfToken');
-    
+        localStorage.clear();
+
     return { isLoggedIn: false };
 };
 

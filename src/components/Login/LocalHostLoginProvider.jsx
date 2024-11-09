@@ -12,10 +12,10 @@ export const LocalHostLoginProvider = ({ children }) => {
     const navigate = useNavigate();
 
 
-    const handleLogin = async (email, password) => {
+    const handleLogin = async (email, password, token) => {
         setLoading(true);
         try {
-            const result = await authService.login(localConfig, email, password);
+            const result = await authService.login(localConfig, email, password, token);
             console.log('Login Response:', result)
             setIsLoggedIn(result.isLoggedIn);
             sessionStorage.setItem('csrfToken', result.csrfToken);
