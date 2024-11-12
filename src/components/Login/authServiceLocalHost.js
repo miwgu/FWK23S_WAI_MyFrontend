@@ -58,9 +58,10 @@ export const secureCall = async (config, url, options = {}) => {
     let response = await fetch(`${apiUrl}${url}`, {
         ...options,
         headers: {
-            ...options.headers,
+            ...((options && options.headers) || {}),
             'X-CSRF-Token': csrfToken,
-            'Content-Type': 'Content-Type' in options.headers ? options.headers['Content-Type'] : 'application/json'
+            'Content-Type': 'Content-Type' in (options.headers ||{}) // If headers is undefined, assign an empty object
+              ? options.headers['Content-Type'] : 'application/json'
         },
         credentials: 'include'
     });
@@ -69,7 +70,7 @@ export const secureCall = async (config, url, options = {}) => {
         response = await fetch(`${apiUrl}${url}`, {
             ...options,
             headers: {
-                ...options.headers,
+                ...((options && options.headers) || {}),
                 'X-CSRF-Token': sessionStorage.getItem('csrfToken')
             },
             credentials: 'include'
