@@ -9,7 +9,7 @@ const DataFetcherContext = createContext();
 export const DataFetcherProvider = ({ children }) => {
     const [error, setError] = useState(null);
 
-    // GET Each data
+    // Call Each data
     const getAllUsers = async () => {
         try {
             const usersData = await secureCall(localConfig, '/allusers', { method: 'GET' });
@@ -34,7 +34,7 @@ export const DataFetcherProvider = ({ children }) => {
  */
     const contextValue = {
         getAllUsers,
-        getUserDetails,
+        //getUserDetails,
         error,
     };
 
