@@ -13,20 +13,42 @@ export const LocalHostLoginProvider = ({ children }) => {
 
 
     const handleLogin = async (email, password, token) => {
+
+        if (!email) {
+            setError("Please enter your email.");
+            return;
+        }
+        if (!password) {
+            setError("Please enter your password.");
+            return;
+        }
+        if (!token) {
+            setError("Please complete the reCAPTCHA.");
+            return;
+        }
+
         setLoading(true);
+        setError(null); //When user login error should be reset
         try {
             const result = await authService.login(localConfig, email, password, token);
             console.log('Login Response:', result)
             setIsLoggedIn(result.isLoggedIn);
             sessionStorage.setItem('csrfToken', result.csrfToken);
+            setError(null);// when user login suscess reset error
             navigate("/usermain")
-            setLoading(false);
         } catch (err) {
-            setError(err.message);
-            setLoading(false);
+            setError(err.message); //set error message
+            console.error('Error during login:', err.message);
             setIsLoggedIn(false);
+        } finally {
+            setLoading(false);
         }
     };
+
+    const handleLogout = async() =>{
+        await authService.logout(localConfig);
+        setIsLoggedIn(false);
+    }
 
     const authService = {
         login,
@@ -40,7 +62,7 @@ export const LocalHostLoginProvider = ({ children }) => {
         loading, 
         error, 
         login: handleLogin, 
-        logout: authService.logout, 
+        logout: handleLogout, //authService.logout
         secureCall: authService.secureCall 
     };
 

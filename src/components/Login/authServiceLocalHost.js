@@ -1,17 +1,41 @@
 export const login = async (config, email, password, token) => {
     const { apiUrl } = config;
+    try{
     const response = await fetch(`${apiUrl}/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password, token }),
         credentials: 'include'
     });
-    if (!response.ok) {
-        throw new Error(`Login failed: ${response.statusText}`);
+    /* if (!response.ok) {
+        //throw new Error(`Login failed: ${response.statusText}`);
+       let errorMessage = 'Login faild!';
+       try{
+          const errorData = await response.json();
+          errorMessage = errorData.message || errorMessage ;
+       }catch (error){
+         //console.error("Error parsing error response:", error);
+         errorMessage = await response.text();
+        }
+       throw new Error(errorMessage);
+    } */
+
+       if (!response.ok) {
+        // Attempt to parse the error message if JSON
+        const errorData = await response.json().catch(() => null);
+        const errorMessage = errorData?.message || 'Login failed';
+        throw new Error(errorMessage);
     }
+
     const data = await response.json();
     sessionStorage.setItem('csrfToken', data.csrfToken);
     return { isLoggedIn: true, csrfToken: data.csrfToken };
+ 
+} catch (error){
+   console.error('Login error:', error.message);
+   throw error;
+
+ }
 };
 
 export const refresh = async (config) => {
@@ -62,6 +86,6 @@ export const logout = async (config) => {
         sessionStorage.removeItem('csrfToken');
         localStorage.clear();
 
-    return { isLoggedIn: false };
+    //return { isLoggedIn: false };
 };
 

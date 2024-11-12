@@ -1,6 +1,6 @@
 import React from 'react'
 
-const User = () => {
+const Users = () => {
     return (
         <div style={styles.container}>
           <div style={styles.text}>User main page</div>
@@ -21,4 +21,4 @@ const User = () => {
       },
     };
 
-export default User
+export default Users
