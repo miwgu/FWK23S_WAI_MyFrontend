@@ -35,7 +35,7 @@ export const LocalHostLoginProvider = ({ children }) => {
             setIsLoggedIn(result.isLoggedIn);
             sessionStorage.setItem('csrfToken', result.csrfToken);
             setError(null);// when user login suscess reset error
-            navigate("/usermain")
+            navigate("/users")
         } catch (err) {
             setError(err.message); //set error message
             console.error('Error during login:', err.message);
