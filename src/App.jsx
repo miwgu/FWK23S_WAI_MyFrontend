@@ -4,6 +4,7 @@ import { LocalHostLoginProvider } from './components/Login/LocalHostLoginProvide
 import SideNav from "./components/Nav/SideNav";
 import Home from "./components/Home/Home";
 import Users from './components/Users/Users';
+import ProtectedRoute from './utils/ProtectedRoute';
 
 function App() {
 
@@ -16,7 +17,11 @@ function App() {
       <Routes>
        <Route path="/" element={<Home/>}/>
        <Route path="/login" element={<Login/>}/>
-       <Route path="/users" element ={<Users/>}/>
+
+       <Route element={<ProtectedRoute />}>
+          <Route path="/users" element ={<Users/>}/>
+       </Route>
+      
       </Routes>
     </>
   )
