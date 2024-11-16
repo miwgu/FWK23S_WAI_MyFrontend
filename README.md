@@ -10,7 +10,7 @@ docker network create --subnet=172.20.0.0/24 fwk-net
 docker network ls
 docker inspect fwk-net
 
-
+---
 
 This guide helps you build and run a Docker container for the `fwk-front` project. Follow the steps below to get started.
 - creates a Docker image based on the instructions in a Dockerfile in the current directory.
