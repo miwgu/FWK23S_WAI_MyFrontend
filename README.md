@@ -19,6 +19,26 @@ docker build -t fwk-front .
 ```bash
 docker run --name fwk-front --network fwk-net --ip 172.20.0.3 -p 5000:5000 -d fwk-front
 ```
+5. Other command
+- Check if the container is running
+```bash
+docker ps
+```
+
+- To stop the container
+```bash
+docker stop fwk-front
+```
+
+- If you need to remove the container
+```bash
+docker rm fwk-front
+```
+- To remove the image
+```bash
+docker rmi fwk-front
+```
+
 ## Log in 
 - admin: admin@example.com  password:1234
 - user1: user1@example.com  password:2345 (You are not Admin) -> you cannot login to Admin app
