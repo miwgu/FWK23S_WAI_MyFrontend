@@ -1,4 +1,4 @@
-import React, { useEffect,useRef, useState } from 'react'
+/* import React, { useEffect,useRef, useState } from 'react'
 
 const ReCaptcha = ({siteKey, callback}) => {
   const recaptchaRef = useRef(null)
@@ -42,4 +42,4 @@ const ReCaptcha = ({siteKey, callback}) => {
   )
 }
 
-export default ReCaptcha
+export default ReCaptcha */
